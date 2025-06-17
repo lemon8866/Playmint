@@ -1,5 +1,10 @@
 module.exports = {
   root: true,
+  ignorePatterns: [
+    'vercel.json',
+    'dist/',
+    'node_modules/'
+  ],
   env: {
     node: true,
     browser: true,
