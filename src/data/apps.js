@@ -74,15 +74,37 @@ export const APPS_DATA = [
     route: '/app/password-generator'
   },
   {
+    id: 'color-echo',
+    name: '色彩回声',
+    description: '点击一个颜色，它会"回应"一个颜色，一来一回构建调色板',
+    icon: '🎵',
+    type: APP_TYPES.CREATIVE,
+    tags: ['设计', '颜色', '创意', '互动'],
+    features: ['色彩对话', '挑战模式', '渐变生成', '调色板导出'],
+    component: 'ColorEcho',
+    route: '/app/color-echo'
+  },
+  {
     id: 'snake-game',
-    name: '贪吃蛇游戏',
-    description: '经典的贪吃蛇游戏，支持多种难度和主题',
+    name: '贪吃蛇',
+    description: '经典贪吃蛇游戏，支持多种难度和音效',
     icon: '🐍',
     type: APP_TYPES.GAME,
     tags: ['游戏', '经典', '休闲'],
-    features: ['多种难度', '主题切换', '排行榜'],
+    features: ['多难度选择', '音效支持', '历史最高分', '流畅操作'],
     component: 'SnakeGame',
-    route: '/app/snake-game'
+    route: '/webgames/snake'
+  },
+  {
+    id: 'blob-land',
+    name: '果冻星球',
+    description: '果冻星球 - 创造可爱的果冻生命体，观察它们的互动与演化',
+    icon: '🧬',
+    type: APP_TYPES.GAME,
+    tags: ['创意', '模拟', '互动', '可爱'],
+    features: ['果冻生命体编辑器', '智能行为模拟', '物理引擎', '沙盒观察', '导出分享'],
+    component: 'BlobLand',
+    route: '/webgames/blob-land'
   }
 ]
 
