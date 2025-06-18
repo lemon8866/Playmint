@@ -52,7 +52,7 @@
             v-for="app in filteredApps" 
             :key="app.id"
             class="app-card card card-hover p-6 cursor-pointer"
-            @click="openApp(app)"
+            @click="viewApp(app)"
           >
             <!-- 应用图标和收藏按钮 -->
             <div class="flex items-start justify-between mb-4">
@@ -199,16 +199,16 @@ export default {
      * 切换收藏状态
      */
     toggleFavorite(appId) {
-      console.log('切换收藏状态:', appId)
+      // console.log('切换收藏状态:', appId)
       const index = this.favorites.indexOf(appId)
       if (index > -1) {
         // 取消收藏
         this.favorites.splice(index, 1)
-        console.log('已取消收藏应用:', appId)
+        // console.log('已取消收藏应用:', appId)
       } else {
         // 添加收藏
         this.favorites.push(appId)
-        console.log('已收藏应用:', appId)
+        // console.log('已收藏应用:', appId)
       }
       // 保存到本地存储
       this.saveFavoritesToStorage()
@@ -229,7 +229,7 @@ export default {
         const stored = localStorage.getItem('playmint_favorites')
         if (stored) {
           this.favorites = JSON.parse(stored)
-          console.log('已加载收藏列表:', this.favorites)
+          // console.log('已加载收藏列表:', this.favorites)
         }
       } catch (error) {
         console.error('加载收藏列表失败:', error)
@@ -243,9 +243,9 @@ export default {
     saveFavoritesToStorage() {
       try {
         localStorage.setItem('playmint_favorites', JSON.stringify(this.favorites))
-        console.log('已保存收藏列表到本地存储')
+        // console.log('已保存收藏列表到本地存储')
       } catch (error) {
-        console.error('保存收藏列表失败:', error)
+        // console.error('保存收藏列表失败:', error)
       }
     },
     
@@ -254,7 +254,7 @@ export default {
   mounted() {
     // 加载收藏列表
     this.loadFavoritesFromStorage()
-    console.log('首页已加载，收藏列表已初始化')
+    // console.log('首页已加载，收藏列表已初始化')
   }
 }
 </script>

@@ -194,8 +194,18 @@ export default {
         const rgb = this.hexToRgb(hex)
         return {
           hex,
-          rgb: `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`,
-          hsl: `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`,
+          rgb: {
+            r: rgb.r,
+            g: rgb.g,
+            b: rgb.b,
+            string: `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`
+          },
+          hsl: {
+            h: Math.round(hsl.h),
+            s: Math.round(hsl.s),
+            l: Math.round(hsl.l),
+            string: `hsl(${Math.round(hsl.h)}, ${Math.round(hsl.s)}%, ${Math.round(hsl.l)}%)`
+          },
           name: `颜色 ${index + 1}`
         }
       })

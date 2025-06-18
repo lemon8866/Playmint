@@ -122,3 +122,6 @@ $RECYCLE.BIN/
 # Docker
 Dockerfile
 .dockerignore
+
+# AI
+/.trae

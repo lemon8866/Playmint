@@ -105,6 +105,17 @@ export const APPS_DATA = [
     features: ['果冻生命体编辑器', '智能行为模拟', '物理引擎', '沙盒观察', '导出分享'],
     component: 'BlobLand',
     route: '/webgames/blob-land'
+  },
+  {
+    id: 'typestorm',
+    name: '字能量场',
+    description: '用打字创造视觉风暴，释放你的情绪能量！融合打字行为、情绪可视化和抽象艺术创作的实验性游戏',
+    icon: '⚡',
+    type: APP_TYPES.GAME,
+    tags: ['创意', '艺术', '打字', '情绪', '可视化'],
+    features: ['实时视觉反馈', '情绪感知', '艺术创作', '挑战模式', '作品导出'],
+    component: 'Typestorm',
+    route: '/webgames/typestorm'
   }
 ]
 
