@@ -54,13 +54,27 @@
             class="app-card card card-hover p-6 cursor-pointer"
             @click="openApp(app)"
           >
-            <!-- 应用图标 -->
+            <!-- 应用图标和收藏按钮 -->
             <div class="flex items-start justify-between mb-4">
               <div class="text-4xl mb-3">{{ app.icon }}</div>
+              <button 
+                @click.stop="toggleFavorite(app.id)"
+                class="p-2 rounded-full hover:bg-gray-100 transition-colors"
+                :title="isFavorite(app.id) ? '取消收藏' : '添加收藏'"
+              >
+                <span class="text-xl">
+                  {{ isFavorite(app.id) ? '❤️' : '🤍' }}
+                </span>
+              </button>
             </div>
             
             <!-- 应用信息 -->
-            <h3 class="text-xl font-semibold text-gray-900 mb-2">{{ app.name }}</h3>
+            <div class="flex items-center gap-2 mb-2">
+              <h3 class="text-xl font-semibold text-gray-900">{{ app.name }}</h3>
+              <span v-if="isFavorite(app.id)" class="text-xs bg-red-100 text-red-600 px-2 py-1 rounded-full">
+                已收藏
+              </span>
+            </div>
             <p class="text-gray-600 text-sm mb-4 line-clamp-2">{{ app.description }}</p>
             
             <!-- 标签 -->
@@ -113,8 +127,8 @@ export default {
   data() {
     return {
       selectedType: 'all',
-
-      searchQuery: ''
+      searchQuery: '',
+      favorites: [] // 收藏的应用ID列表
     }
   },
   computed: {
@@ -129,8 +143,6 @@ export default {
         apps = apps.filter(app => app.type === this.selectedType)
       }
       
-
-      
       // 按搜索关键词筛选
       if (this.searchQuery.trim()) {
         const query = this.searchQuery.toLowerCase().trim()
@@ -141,7 +153,15 @@ export default {
         )
       }
       
-      return apps
+      // 收藏的应用置顶排序
+      return apps.sort((a, b) => {
+        const aIsFavorite = this.isFavorite(a.id)
+        const bIsFavorite = this.isFavorite(b.id)
+        
+        if (aIsFavorite && !bIsFavorite) return -1
+        if (!aIsFavorite && bIsFavorite) return 1
+        return 0
+      })
     },
     
     /**
@@ -165,7 +185,7 @@ export default {
      */
     resetFilters() {
       this.selectedType = 'all'
-      this.searchKeyword = ''
+      this.searchQuery = ''
     },
     
     /**
@@ -175,10 +195,66 @@ export default {
       this.$router.push(`/app/${app.id}`)
     },
     
+    /**
+     * 切换收藏状态
+     */
+    toggleFavorite(appId) {
+      console.log('切换收藏状态:', appId)
+      const index = this.favorites.indexOf(appId)
+      if (index > -1) {
+        // 取消收藏
+        this.favorites.splice(index, 1)
+        console.log('已取消收藏应用:', appId)
+      } else {
+        // 添加收藏
+        this.favorites.push(appId)
+        console.log('已收藏应用:', appId)
+      }
+      // 保存到本地存储
+      this.saveFavoritesToStorage()
+    },
+    
+    /**
+     * 检查应用是否已收藏
+     */
+    isFavorite(appId) {
+      return this.favorites.includes(appId)
+    },
+    
+    /**
+     * 从本地存储加载收藏列表
+     */
+    loadFavoritesFromStorage() {
+      try {
+        const stored = localStorage.getItem('playmint_favorites')
+        if (stored) {
+          this.favorites = JSON.parse(stored)
+          console.log('已加载收藏列表:', this.favorites)
+        }
+      } catch (error) {
+        console.error('加载收藏列表失败:', error)
+        this.favorites = []
+      }
+    },
+    
+    /**
+     * 保存收藏列表到本地存储
+     */
+    saveFavoritesToStorage() {
+      try {
+        localStorage.setItem('playmint_favorites', JSON.stringify(this.favorites))
+        console.log('已保存收藏列表到本地存储')
+      } catch (error) {
+        console.error('保存收藏列表失败:', error)
+      }
+    },
+    
 
   },
   mounted() {
-    // 首页已加载
+    // 加载收藏列表
+    this.loadFavoritesFromStorage()
+    console.log('首页已加载，收藏列表已初始化')
   }
 }
 </script>
