@@ -116,6 +116,39 @@ export const APPS_DATA = [
     features: ['实时视觉反馈', '情绪感知', '艺术创作', '挑战模式', '作品导出'],
     component: 'Typestorm',
     route: '/webgames/typestorm'
+  },
+  {
+    id: 'background-removal',
+    name: '智能背景移除',
+    description: '使用AI技术一键移除图片背景，支持多种图片格式',
+    icon: '🖼️',
+    type: APP_TYPES.AI,
+    tags: ['AI', '图片处理', '背景移除', '工具', '本地处理'],
+    features: ['本地AI处理', '隐私保护', '一键背景移除', '多格式支持', '高质量输出'],
+    component: 'BackgroundRemoval',
+    route: '/app/background-removal'
+  },
+  {
+    id: 'speech-recognition',
+    name: '智能语音识别',
+    description: '基于Whisper模型的本地语音识别，支持多语言转录和翻译',
+    icon: '🎤',
+    type: APP_TYPES.AI,
+    tags: ['AI', '语音识别', 'Whisper', '转录', '翻译', '本地处理'],
+    features: ['本地AI识别', '隐私保护', '多语言支持', '实时录音', '离线可用'],
+    component: 'SpeechRecognition',
+    route: '/app/speech-recognition'
+  },
+  {
+    id: 'text-to-speech',
+    name: '智能文本转语音',
+    description: '使用AI技术将文本转换为自然语音，支持多种语音模型',
+    icon: '🔊',
+    type: APP_TYPES.AI,
+    tags: ['AI', '文本转语音', 'TTS', '语音合成', '音频生成', '本地处理'],
+    features: ['本地AI合成', '隐私保护', '多模型支持', '参数调节', '离线可用'],
+    component: 'TextToSpeech',
+    route: '/app/text-to-speech'
   }
 ]
 
