@@ -528,17 +528,16 @@ export default {
     generateParticles(event) {
       if (!this.app || this.selectedEffects.length === 0) return
       
-      // 随机选择画布位置
-      const x = Math.random() * this.app.screen.width
-      const y = Math.random() * this.app.screen.height
-      
       // 性能模式下减少效果数量
       const effectsToGenerate = this.performanceMode 
         ? this.selectedEffects.slice(0, Math.max(1, Math.floor(this.selectedEffects.length / 2)))
         : this.selectedEffects
       
-      // 根据选中的效果生成粒子
+      // 根据选中的效果生成粒子，每个效果使用不同的随机位置
       effectsToGenerate.forEach(effectId => {
+        // 为每个效果单独生成随机位置
+        const x = Math.random() * this.app.screen.width
+        const y = Math.random() * this.app.screen.height
         this.createParticleEffect(effectId, x, y)
       })
     },
